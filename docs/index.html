@@ -14,17 +14,13 @@
     :root{
       --bg:#060607;
       --bg2:#0b0b10;
-      --card: rgba(255,255,255,.04);
-      --card2: rgba(0,0,0,.25);
       --gold1:#f6e7b2;
       --gold2:#d2aa4a;
       --gold3:#7a5a1a;
       --text:#f5f0e6;
       --muted:rgba(245,240,230,.72);
       --line: rgba(210,170,74,.35);
-      --stroke: rgba(210,170,74,.22);
       --shadow: rgba(0,0,0,.55);
-      --success: rgba(210,170,74,.22);
       --radius: 22px;
     }
 
@@ -108,6 +104,7 @@
       color: rgba(245,240,230,.92);
       font-size: 14px;
     }
+
     .chipRow{
       display:flex;
       gap:8px;
@@ -213,6 +210,7 @@
       aspect-ratio: 4/3;
       overflow:hidden;
       position:relative;
+      display:block;
     }
     .heroArt img{
       width:100%;
@@ -295,9 +293,7 @@
     }
 
     /* Sections */
-    .section{
-      margin-top: 34px;
-    }
+    .section{ margin-top: 34px; }
     .sectionHead{
       display:flex;
       align-items:flex-end;
@@ -323,16 +319,12 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 14px;
     }
-    @media (max-width: 1080px){
-      .grid{ grid-template-columns: repeat(3, 1fr); }
-    }
+    @media (max-width: 1080px){ .grid{ grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 760px){
       .grid{ grid-template-columns: repeat(2, 1fr); }
       .topbar{ flex-direction:column; align-items:stretch; }
     }
-    @media (max-width: 460px){
-      .grid{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 460px){ .grid{ grid-template-columns: 1fr; } }
 
     .card{
       border-radius: 18px;
@@ -425,7 +417,7 @@
       background: linear-gradient(180deg, rgba(246,231,178,.20), rgba(210,170,74,.10));
     }
 
-    /* Drawer / Modal */
+    /* Modal */
     .modalBackdrop{
       position:fixed; inset:0;
       background: rgba(0,0,0,.65);
@@ -476,9 +468,7 @@
       grid-template-columns: 1.1fr .9fr;
       gap: 14px;
     }
-    @media (max-width: 820px){
-      .modalBody{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 820px){ .modalBody{ grid-template-columns: 1fr; } }
     .modalPanel{
       border-radius: 18px;
       border: 1px solid rgba(210,170,74,.14);
@@ -503,6 +493,7 @@
       margin-top: 12px;
       flex-wrap:wrap;
     }
+
     footer{
       margin-top: 50px;
       text-align:center;
@@ -577,7 +568,7 @@
         </div>
 
         <div class="heroArt" aria-label="Hero artwork">
-          <!-- Optional: add /assets/hero-art.png (your city/platform graphic) -->
+          <!-- Optional: add /assets/hero-art.png -->
           <img src="assets/hero-art.png" alt="Storefront hero art"
                onerror="this.style.display='none'; this.parentElement.style.display='grid'; this.parentElement.style.placeItems='center'; this.parentElement.innerHTML='<div style=&quot;padding:22px;text-align:center;opacity:.78&quot;><div style=&quot;font-family:Cinzel,serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(246,231,178,.9);font-weight:700&quot;>Add Hero Art</div><div style=&quot;margin-top:8px;font-size:12px;color:rgba(245,240,230,.65)&quot;>Put an image at <b>/assets/hero-art.png</b></div></div>';">
         </div>
@@ -634,6 +625,14 @@
       <div class="tiny">
         Non-custodial storefront UI. Digital products / licenses are delivered by your chosen provider (Stripe, Gumroad, Shopify, WooCommerce, etc.). Replace links with your real checkout URLs and hosted files.
       </div>
+
+      <div style="margin-top:14px">
+        <a href="terms.html">Terms</a> •
+        <a href="privacy.html">Privacy</a> •
+        <a href="license.html">License</a> •
+        <a href="refund.html">Refunds</a> •
+        <a href="verification.html">Verification</a>
+      </div>
     </footer>
   </div>
 
@@ -671,165 +670,74 @@
   </div>
 
   <script>
-    // ========= EDIT THESE PRODUCTS =========
-    // Replace buyUrl with your real Stripe/Gumroad/Shopify/Woo checkout links.
+    // Replace buyUrl with your real checkout links.
     const PRODUCTS = [
-      // Featured
-      {
-        id: "founder-edition",
-        category: ["featured","license"],
-        badge: "Founder",
-        title: "Founder Edition — 100 License Cap",
-        price: "$700",
-        summary: "Flagship licensing package for early adopters. Structured for deterministic issuance and record authority.",
-        includes: "Founder License Instrument (PDF), Deployment Guide (PDF), Templates, Manifest + hashes.",
-        delivery: "Instant digital delivery after checkout.",
-        tags: ["Deterministic Vesting","Record Authority","Cap-Limited"],
-        buyUrl: "#"
+      { id:"founder-edition", category:["featured","license"], badge:"Founder", title:"Founder Edition — 100 License Cap", price:"$700",
+        summary:"Flagship licensing package for early adopters. Structured for deterministic issuance and record authority.",
+        includes:"Founder License Instrument (PDF), Deployment Guide (PDF), Templates, Manifest + hashes.",
+        delivery:"Instant digital delivery after checkout.", tags:["Deterministic Vesting","Record Authority","Cap-Limited"], buyUrl:"#"
       },
-      {
-        id: "enterprise-license-instrument",
-        category: ["featured","docs","license"],
-        badge: "Core Doc",
-        title: "Enterprise License Instrument v1.0",
-        price: "$100",
-        summary: "Human-readable license instrument aligned to machine-readable records.",
-        includes: "License Instrument PDF + editable source text.",
-        delivery: "Instant digital delivery after checkout.",
-        tags: ["Enterprise","Perpetual","Deterministic"],
-        buyUrl: "#"
+      { id:"enterprise-license-instrument", category:["featured","docs","license"], badge:"Core Doc", title:"Enterprise License Instrument v1.0", price:"$100",
+        summary:"Human-readable license instrument aligned to machine-readable records.",
+        includes:"License Instrument PDF + editable source text.",
+        delivery:"Instant digital delivery after checkout.", tags:["Enterprise","Perpetual","Deterministic"], buyUrl:"#"
       },
-      {
-        id: "architectural-valuation-doctrine",
-        category: ["featured","docs"],
-        badge: "Doctrine",
-        title: "Architectural Valuation Doctrine v1.0",
-        price: "$100",
-        summary: "Structural valuation logic for deterministic infrastructure licensing systems.",
-        includes: "Doctrine PDF + machine-readable schema (JSON).",
-        delivery: "Instant digital delivery after checkout.",
-        tags: ["Valuation","Schema","Fail-Closed"],
-        buyUrl: "#"
+      { id:"architectural-valuation-doctrine", category:["featured","docs"], badge:"Doctrine", title:"Architectural Valuation Doctrine v1.0", price:"$100",
+        summary:"Structural valuation logic for deterministic infrastructure licensing systems.",
+        includes:"Doctrine PDF + machine-readable schema (JSON).",
+        delivery:"Instant digital delivery after checkout.", tags:["Valuation","Schema","Fail-Closed"], buyUrl:"#"
       },
 
-      // Bundles
-      {
-        id: "deterministic-bundle-v1",
-        category: ["bundle"],
-        badge: "Bundle",
-        title: "Deterministic Infrastructure License Bundle v1.0",
-        price: "$700",
-        summary: "Complete commercial pack: documents, templates, and verification artifacts.",
-        includes: "PDFs + templates + release manifest + SHA-256 hashes + verifier script.",
-        delivery: "ZIP download after checkout.",
-        tags: ["Bundle","ZIP","Hashes"],
-        buyUrl: "#"
+      { id:"deterministic-bundle-v1", category:["bundle"], badge:"Bundle", title:"Deterministic Infrastructure License Bundle v1.0", price:"$700",
+        summary:"Complete commercial pack: documents, templates, and verification artifacts.",
+        includes:"PDFs + templates + release manifest + SHA-256 hashes + verifier script.",
+        delivery:"ZIP download after checkout.", tags:["Bundle","ZIP","Hashes"], buyUrl:"#"
       },
-      {
-        id: "pdf-ready-storefront-pack",
-        category: ["bundle","docs"],
-        badge: "Store Pack",
-        title: "PDF-Ready Storefront Pack",
-        price: "$100",
-        summary: "Store text, listing templates, cover specs, and catalog layout for publishing.",
-        includes: "Listing copy, cover art specs, category templates, HTML starter structure.",
-        delivery: "Instant digital delivery after checkout.",
-        tags: ["Catalog","Listings","Brand Kit"],
-        buyUrl: "#"
+      { id:"pdf-ready-storefront-pack", category:["bundle","docs"], badge:"Store Pack", title:"PDF-Ready Storefront Pack", price:"$100",
+        summary:"Store text, listing templates, cover specs, and catalog layout for publishing.",
+        includes:"Listing copy, cover art specs, category templates, HTML starter structure.",
+        delivery:"Instant digital delivery after checkout.", tags:["Catalog","Listings","Brand Kit"], buyUrl:"#"
       },
 
-      // Licenses
-      {
-        id: "tier-i",
-        category: ["license"],
-        badge: "Tier I",
-        title: "Tier I — Commercial License (Entry)",
-        price: "$700",
-        summary: "Sell licensed derivatives and distribute capped/serial licenses under your brand.",
-        includes: "Commercial license + resale rules + issuance record format.",
-        delivery: "Instant digital delivery after checkout.",
-        tags: ["Commercial","Resale","Issuance"],
-        buyUrl: "#"
+      { id:"tier-i", category:["license"], badge:"Tier I", title:"Tier I — Commercial License (Entry)", price:"$700",
+        summary:"Sell licensed derivatives and distribute capped/serial licenses under your brand.",
+        includes:"Commercial license + resale rules + issuance record format.",
+        delivery:"Instant digital delivery after checkout.", tags:["Commercial","Resale","Issuance"], buyUrl:"#"
       },
-      {
-        id: "tier-ii",
-        category: ["license"],
-        badge: "Tier II",
-        title: "Tier II — Enterprise Alignment Package",
-        price: "$7,500",
-        summary: "Enterprise deployment alignment: issuance policy, data model, and integration plan.",
-        includes: "Deployment plan, integration blueprint, enterprise-ready documentation set.",
-        delivery: "Manual fulfillment (scheduling + delivery).",
-        tags: ["Enterprise","Integration","Deployment"],
-        buyUrl: "#"
+      { id:"tier-ii", category:["license"], badge:"Tier II", title:"Tier II — Enterprise Alignment Package", price:"$7,500",
+        summary:"Enterprise deployment alignment: issuance policy, data model, and integration plan.",
+        includes:"Deployment plan, integration blueprint, enterprise-ready documentation set.",
+        delivery:"Manual fulfillment (scheduling + delivery).", tags:["Enterprise","Integration","Deployment"], buyUrl:"#"
       },
-      {
-        id: "tier-iii",
-        category: ["license"],
-        badge: "Tier III",
-        title: "Tier III — Embedded Infrastructure Licensing",
-        price: "$25k–$100k",
-        summary: "Custom embedding into organizational systems with contract-grade deployment support.",
-        includes: "Custom contract + embedded license engine design + implementation pathway.",
-        delivery: "Manual fulfillment (contract + project).",
-        tags: ["Custom","Contract","Embedding"],
-        buyUrl: "#"
+      { id:"tier-iii", category:["license"], badge:"Tier III", title:"Tier III — Embedded Infrastructure Licensing", price:"$25k–$100k",
+        summary:"Custom embedding into organizational systems with contract-grade deployment support.",
+        includes:"Custom contract + embedded license engine design + implementation pathway.",
+        delivery:"Manual fulfillment (contract + project).", tags:["Custom","Contract","Embedding"], buyUrl:"#"
       },
 
-      // Proof
-      {
-        id: "docs-proof-pack",
-        category: ["proof"],
-        badge: ".proof",
-        title: "docs.proof Pack v1.0",
-        price: "$100",
-        summary: "Verification artifacts for published documents: proof object, hashes, verifier.",
-        includes: "proof object JSON, hashes file, verifier script, index registration structure.",
-        delivery: "Instant digital delivery after checkout.",
-        tags: ["Verification","Hashes","Audit"],
-        buyUrl: "#"
+      { id:"docs-proof-pack", category:["proof"], badge:".proof", title:"docs.proof Pack v1.0", price:"$100",
+        summary:"Verification artifacts for published documents: proof object, hashes, verifier.",
+        includes:"proof object JSON, hashes file, verifier script, index registration structure.",
+        delivery:"Instant digital delivery after checkout.", tags:["Verification","Hashes","Audit"], buyUrl:"#"
       },
-      {
-        id: "record-authority-starter",
-        category: ["proof","docs"],
-        badge: "System",
-        title: "Record Authority Starter (Blueprint)",
-        price: "$100",
-        summary: "Blueprint for append-only record authority and deterministic evaluation events.",
-        includes: "Blueprint PDF + reference schema + event format.",
-        delivery: "Instant digital delivery after checkout.",
-        tags: ["Append-only","Events","Deterministic"],
-        buyUrl: "#"
+      { id:"record-authority-starter", category:["proof","docs"], badge:"System", title:"Record Authority Starter (Blueprint)", price:"$100",
+        summary:"Blueprint for append-only record authority and deterministic evaluation events.",
+        includes:"Blueprint PDF + reference schema + event format.",
+        delivery:"Instant digital delivery after checkout.", tags:["Append-only","Events","Deterministic"], buyUrl:"#"
       },
 
-      // Docs
-      {
-        id: "terminology-index",
-        category: ["docs"],
-        badge: "Index",
-        title: "Terminology Index — PDF-Ready Catalog",
-        price: "$100",
-        summary: "Searchable terminology catalog aligned to product SKUs and license terms.",
-        includes: "Terminology PDF + web index template.",
-        delivery: "Instant digital delivery after checkout.",
-        tags: ["Index","Catalog","Cross-refs"],
-        buyUrl: "#"
+      { id:"terminology-index", category:["docs"], badge:"Index", title:"Terminology Index — PDF-Ready Catalog", price:"$100",
+        summary:"Searchable terminology catalog aligned to product SKUs and license terms.",
+        includes:"Terminology PDF + web index template.",
+        delivery:"Instant digital delivery after checkout.", tags:["Index","Catalog","Cross-refs"], buyUrl:"#"
       },
-      {
-        id: "storefront-ux-layout",
-        category: ["docs"],
-        badge: "Layout",
-        title: "Amazon-style Storefront Layout (HTML)",
-        price: "$100",
-        summary: "A premium storefront layout ready for GitHub Pages deployment.",
-        includes: "HTML/CSS layout + sections + product card system.",
-        delivery: "Instant digital delivery after checkout.",
-        tags: ["HTML","GitHub Pages","UI"],
-        buyUrl: "#"
+      { id:"storefront-ux-layout", category:["docs"], badge:"Layout", title:"Amazon-style Storefront Layout (HTML)", price:"$100",
+        summary:"A premium storefront layout ready for GitHub Pages deployment.",
+        includes:"HTML/CSS layout + sections + product card system.",
+        delivery:"Instant digital delivery after checkout.", tags:["HTML","GitHub Pages","UI"], buyUrl:"#"
       }
     ];
 
-    // ========= RENDERING =========
     const grids = {
       featured: document.getElementById("gridFeatured"),
       bundles: document.getElementById("gridBundles"),
@@ -838,15 +746,23 @@
       docs: document.getElementById("gridDocs")
     };
 
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+    function escapeAttr(s){ return escapeHtml(s).replaceAll("`","&#096;"); }
+
     function cardTemplate(p){
-      const tags = p.tags?.slice(0,3).map(t => `<span class="spec">${escapeHtml(t)}</span>`).join("") || "";
-      const badge = escapeHtml(p.badge || "Item");
-      const price = escapeHtml(p.price || "");
+      const tags = (p.tags || []).slice(0,3).map(t => `<span class="spec">${escapeHtml(t)}</span>`).join("");
       return `
         <article class="card" data-id="${escapeHtml(p.id)}" data-cat="${p.category.join(",")}">
           <div class="cardTop">
-            <span class="badge">${badge}</span>
-            <span class="price">${price}</span>
+            <span class="badge">${escapeHtml(p.badge || "Item")}</span>
+            <span class="price">${escapeHtml(p.price || "")}</span>
           </div>
           <div class="cardBody">
             <h3 class="cardTitle">${escapeHtml(p.title)}</h3>
@@ -862,10 +778,7 @@
     }
 
     function render(list){
-      // clear
       Object.values(grids).forEach(g => g.innerHTML = "");
-
-      // split
       const featured = list.filter(p => p.category.includes("featured"));
       const bundles  = list.filter(p => p.category.includes("bundle"));
       const licenses = list.filter(p => p.category.includes("license") && !p.category.includes("featured"));
@@ -879,6 +792,7 @@
       grids.docs.innerHTML     = docs.map(cardTemplate).join("");
 
       wireCards();
+      applyFilters(); // apply current filter/search to newly-rendered cards
     }
 
     function wireCards(){
@@ -892,7 +806,7 @@
       });
     }
 
-    // ========= MODAL =========
+    // Modal
     const modalBackdrop = document.getElementById("modalBackdrop");
     const closeModalBtn = document.getElementById("closeModal");
     const modalTitle    = document.getElementById("modalTitle");
@@ -945,7 +859,7 @@ TAGS: ${(lastProduct.tags||[]).join(", ")}`;
       }
     });
 
-    // ========= FILTERS / SEARCH =========
+    // Filters / Search
     const tabs = document.querySelectorAll(".tab");
     const searchInput = document.getElementById("searchInput");
 
@@ -992,27 +906,10 @@ TAGS: ${(lastProduct.tags||[]).join(", ")}`;
       });
     });
 
-    // ========= HELPERS =========
-    function escapeHtml(s){
-      return String(s ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-    function escapeAttr(s){ return escapeHtml(s).replaceAll("`","&#096;"); }
-
     // init
-    document.getElementById("y").textContent = new Date().getFullYear();
+    const y = document.getElementById("y");
+    if (y) y.textContent = new Date().getFullYear();
     render(PRODUCTS);
   </script>
 </body>
-</html>
-<div style="margin-top:20px">
-  <a href="terms.html">Terms</a> •
-  <a href="privacy.html">Privacy</a> •
-  <a href="license.html">License</a> •
-  <a href="refund.html">Refunds</a> •
-  <a href="verification.html">Verification</a>
-</div>
+        </html>
